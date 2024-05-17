@@ -2,14 +2,14 @@
 {
     public class LoginDto
     {
-        public int estudianteId { get; set; }
+        public int usuarioId { get; set; }
         public string nombreEstudiante { get; set; } = string.Empty;
         public string password { get; set; } = string.Empty;
 
-        public LoginDto(int estudianteId, string nombres, string password)
+        public LoginDto(int usuarioId, string nombre, string password)
         {
-            this.estudianteId = estudianteId;
-            nombreEstudiante = nombres;
+            this.usuarioId = usuarioId;
+            this.nombreEstudiante = nombre;
             this.password = password;
         }
     }
