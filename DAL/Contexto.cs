@@ -10,7 +10,7 @@ namespace PruebaNewTechApi.DAL
     {
         public DbSet<Book>? Book { set; get; }
         public DbSet<Usuario>? Usuarios { set; get; }
-        public DbSet<Tarea>? Tareas { set; get; }
+        public DbSet<Tarea>? Tarea { set; get; }
 
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
