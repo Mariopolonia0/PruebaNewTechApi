@@ -1,5 +1,3 @@
-
-
 using Microsoft.EntityFrameworkCore;
 using PruebaNewTechApi.Model;
 
@@ -8,6 +6,8 @@ namespace PruebaNewTechApi.DAL
     public class Contexto : DbContext
     {
         public DbSet<Book>? Book { set; get; }
+        public DbSet<Usuario>? Usuario { set; get; }
+        public DbSet<Tarea>? Tareas { set; get; }
 
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
@@ -25,29 +25,14 @@ namespace PruebaNewTechApi.DAL
                 Edicion = "Tercera",
                 Precio = 1000
             });
-            modelBuilder.Entity<Book>().HasData(new Book
+            modelBuilder.Entity<Usuario>().HasData(new Usuario
             {
-                BookId = 101,
-                Nombre = "El lenguaje de programacion C#",
-                NombreAutor = "Francisco Javier Ceballos",
-                Edicion = "Primera",
-                Precio = 10000
-            });
-            modelBuilder.Entity<Book>().HasData(new Book
-            {
-                BookId = 103,
-                Nombre = "Kotlin in Action",
-                NombreAutor = "Dmitry Jemerov and Svetlana Isakova",
-                Edicion = "Tercera",
-                Precio = 13000
-            });
-            modelBuilder.Entity<Book>().HasData(new Book
-            {
-                BookId = 104,
-                Nombre = "Java 2 Manual de programacion",
-                NombreAutor = "Luis Joyanes Aguilar",
-                Edicion = "Tercera",
-                Precio = 9000
+                UsuarioId = 100,
+                Nombre = "Super",
+                Apellido = "admin",
+                NombreUsuario = "admin",
+                Password = "admin",
+                NombreEmpresa = "SP"
             });
         }
     }
