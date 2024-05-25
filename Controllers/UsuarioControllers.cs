@@ -26,6 +26,19 @@ namespace PruebaNewTechApi.Controllers
             return await _context.Usuario!.ToListAsync();
         }
 
+        [HttpGet("{Empresa}")]
+        public async Task<ActionResult<IEnumerable<UsuarioForTareas>>> GetUsuarioForTareas(String Empresa)
+        {
+            var usuarios = new List<UsuarioForTareas>();
+
+            await _context.Usuario!.Where(u => u.NombreEmpresa == Empresa).
+                ForEachAsync(usuario => usuarios.Add(
+                    new UsuarioForTareas(usuario.UsuarioId, usuario.Nombre + " " + usuario.Apellido))
+                );
+
+            return usuarios;
+        }
+
         [HttpPost]
         [Route("login")]
         public async Task<ActionResult<Usuario>> GetLogin(LoginIn loginIn)
