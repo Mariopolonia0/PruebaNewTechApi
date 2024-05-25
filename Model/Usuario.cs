@@ -13,5 +13,16 @@ namespace PruebaNewTechApi.Model
         public string NombreUsuario { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string NombreEmpresa { get; set; } = string.Empty;
+        public Usuario() { }    
+
+        public Usuario(int usuarioId, string nombre)
+        {
+            UsuarioId = usuarioId;
+            Nombre = nombre;
+            Apellido = "null";
+            NombreUsuario = "null";
+            Password = "null";
+            NombreEmpresa = "null";
+        }
     }
 }
