@@ -31,7 +31,7 @@ namespace PruebaNewTechApi.Controllers
         {
             var usuarios = new List<UsuarioForTareas>();
 
-            await _context.Usuario!.Where(u => u.NombreEmpresa == Empresa).
+            await _context.Usuario!.Where(u => u.NumeroLicencia == Empresa).
                 ForEachAsync(usuario => usuarios.Add(
                     new UsuarioForTareas(usuario.UsuarioId, usuario.Nombre + " " + usuario.Apellido))
                 );
@@ -56,12 +56,14 @@ namespace PruebaNewTechApi.Controllers
                 if (usuario.Password == loginIn.password)
                     return Ok(usuario);
 
-            return BadRequest("no esta registrado");
+            return Ok(new Usuario());
         }
 
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
+            Result resultMensseger = new Result("");
+
             if (_context.Usuario == null)
             {
                 return NotFound();
@@ -71,7 +73,8 @@ namespace PruebaNewTechApi.Controllers
             {
                 _context.Entry(usuario).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                return Ok("actulizado");
+                resultMensseger.dataResult = "actulizado";
+                return Ok(resultMensseger);
             }
             else
             {
@@ -82,10 +85,15 @@ namespace PruebaNewTechApi.Controllers
                 {
                     _context.Usuario.Add(usuario);
                     await _context.SaveChangesAsync();
-                    return Ok("agregado");
+                    resultMensseger.dataResult = "agregar";
+                    return Ok(resultMensseger);
                 }
                 else
-                    return BadRequest(result);
+                {
+                    resultMensseger.dataResult = result;
+                    return BadRequest(resultMensseger);
+                }
+
             }
         }
 
@@ -93,8 +101,11 @@ namespace PruebaNewTechApi.Controllers
         {
             var result = string.Empty;
 
-            if (_context.Usuario!.Any(e => e.Apellido == usuario.Apellido))
-                result = "El apellido ya existe";
+            var nombreExiste = _context.Usuario!.Any(e => e.Nombre == usuario.Nombre);
+            var apellidoExiste = _context.Usuario!.Any(e => e.Apellido == usuario.Apellido);
+
+            if (nombreExiste && apellidoExiste)
+                result = "Usted esta registrado";
 
             else if (_context.Usuario!.Any(e => e.NombreUsuario == usuario.NombreUsuario))
                 result = "El nombre usuario ya existe";

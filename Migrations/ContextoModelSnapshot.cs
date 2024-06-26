@@ -52,6 +52,42 @@ namespace PruebaNewTechApi.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PruebaNewTechApi.Model.Licencia", b =>
+                {
+                    b.Property<int>("LicenciaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("CostoLicencia")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("DireccionCliente")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NombreCliente")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NumeroLicencia")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("LicenciaId");
+
+                    b.ToTable("Licencias");
+
+                    b.HasData(
+                        new
+                        {
+                            LicenciaId = 100,
+                            CostoLicencia = 200.0,
+                            DireccionCliente = "575w 189st",
+                            NombreCliente = "",
+                            NumeroLicencia = "SP"
+                        });
+                });
+
             modelBuilder.Entity("PruebaNewTechApi.Model.Tarea", b =>
                 {
                     b.Property<int>("TareaId")
@@ -100,11 +136,11 @@ namespace PruebaNewTechApi.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("NombreEmpresa")
+                    b.Property<string>("NombreUsuario")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("NombreUsuario")
+                    b.Property<string>("NumeroLicencia")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -122,8 +158,8 @@ namespace PruebaNewTechApi.Migrations
                             UsuarioId = 100,
                             Apellido = "admin",
                             Nombre = "Super",
-                            NombreEmpresa = "SP",
                             NombreUsuario = "admin",
+                            NumeroLicencia = "SP",
                             Password = "admin"
                         });
                 });

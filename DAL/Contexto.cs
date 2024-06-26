@@ -8,6 +8,7 @@ namespace PruebaNewTechApi.DAL
         public DbSet<Book>? Book { set; get; }
         public DbSet<Usuario>? Usuario { set; get; }
         public DbSet<Tarea>? Tareas { set; get; }
+        public DbSet<Licencia>? Licencias { set; get; }
 
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
@@ -32,7 +33,14 @@ namespace PruebaNewTechApi.DAL
                 Apellido = "admin",
                 NombreUsuario = "admin",
                 Password = "admin",
-                NombreEmpresa = "SP"
+                NumeroLicencia = "SP"
+            });
+            modelBuilder.Entity<Licencia>().HasData(new Licencia
+            {
+                LicenciaId = 100,
+                NumeroLicencia = "SP",
+                DireccionCliente = "575w 189st",
+                CostoLicencia = 200
             });
         }
     }

@@ -25,6 +25,22 @@ namespace PruebaNewTechApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Licencias",
+                columns: table => new
+                {
+                    LicenciaId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NumeroLicencia = table.Column<string>(type: "TEXT", nullable: false),
+                    NombreCliente = table.Column<string>(type: "TEXT", nullable: false),
+                    DireccionCliente = table.Column<string>(type: "TEXT", nullable: false),
+                    CostoLicencia = table.Column<double>(type: "REAL", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Licencias", x => x.LicenciaId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tareas",
                 columns: table => new
                 {
@@ -52,7 +68,7 @@ namespace PruebaNewTechApi.Migrations
                     Apellido = table.Column<string>(type: "TEXT", nullable: false),
                     NombreUsuario = table.Column<string>(type: "TEXT", nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: false),
-                    NombreEmpresa = table.Column<string>(type: "TEXT", nullable: false)
+                    NumeroLicencia = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,15 +81,23 @@ namespace PruebaNewTechApi.Migrations
                 values: new object[] { 100, "Tercera", "El Coronel no tiene quien le escriba", "Grabriel Garcia Marquez", 1000m });
 
             migrationBuilder.InsertData(
+                table: "Licencias",
+                columns: new[] { "LicenciaId", "CostoLicencia", "DireccionCliente", "NombreCliente", "NumeroLicencia" },
+                values: new object[] { 100, 200.0, "575w 189st", "", "SP" });
+
+            migrationBuilder.InsertData(
                 table: "Usuario",
-                columns: new[] { "UsuarioId", "Apellido", "Nombre", "NombreEmpresa", "NombreUsuario", "Password" },
-                values: new object[] { 100, "admin", "Super", "SP", "admin", "admin" });
+                columns: new[] { "UsuarioId", "Apellido", "Nombre", "NombreUsuario", "NumeroLicencia", "Password" },
+                values: new object[] { 100, "admin", "Super", "admin", "SP", "admin" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Book");
+
+            migrationBuilder.DropTable(
+                name: "Licencias");
 
             migrationBuilder.DropTable(
                 name: "Tareas");
