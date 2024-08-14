@@ -2,10 +2,14 @@
 {
     public class Result
     {
-        public string dataResult { get; set; }
+        public string DataResult { get; set; }
         public Result(string _dataResult)
         {
-            dataResult = _dataResult;
+            DataResult = _dataResult;
+        }
+        public Result()
+        {
+            DataResult = "";
         }
     }
 }

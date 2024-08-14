@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using PruebaNewTechApi.DAL;
 using PruebaNewTechApi.Model;
+using PruebaNewTechApi.Model.Dto;
+using System.Threading;
 
 namespace PruebaNewTechApi.Controllers
 {
@@ -21,9 +23,30 @@ namespace PruebaNewTechApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tarea>>> GetListBook()
+        public async Task<ActionResult<IEnumerable<TareaDto>>> GetListBook()
         {
-            return await _context.Tareas!.ToListAsync();
+
+            var TareasDtos = new List<TareaDto>();
+            var lista = await _context.Tareas!.ToListAsync();
+
+            lista.ForEach(tarea =>
+                TareasDtos.Add(new TareaDto(_context.Usuario!.Find(tarea.UsuarioId)!, tarea))
+            );
+
+            return TareasDtos;
+        }
+
+        [HttpGet("{usuarioId}")]//("{usuarioId}")
+        public async Task<ActionResult<IEnumerable<Tarea>>> GetListBookForUsuarioId(int usuarioId)
+        {
+            var usuarioExiste = _context.Usuario!.Any(e => e.UsuarioId == usuarioId);
+
+            if (!usuarioExiste)
+            {
+                return NotFound(new Result("No existe el usuario"));
+            }
+
+            return await _context.Tareas!.Where(t => t.UsuarioId == usuarioId).ToListAsync();
         }
 
         [HttpPost]
@@ -34,19 +57,27 @@ namespace PruebaNewTechApi.Controllers
                 return NotFound();
             }
 
+            var usuarioExiste = _context.Usuario!.Any(e => e.UsuarioId == tarea.UsuarioId);
+
+            if (!usuarioExiste)
+            {
+                return NotFound(new Result("No existe el usuario"));
+            }
+
             if (TareaExists(tarea.TareaId))
             {
                 _context.Tareas!.Update(tarea);
                 await _context.SaveChangesAsync();
-                return Ok("actulizado");
+                return Ok(new Result("Actualidado"));
             }
             else
             {
                 tarea.TareaId = 0;
                 _context.Tareas!.Add(tarea);
                 await _context.SaveChangesAsync();
-                return Ok("agregado");
+                return Ok(new Result("agregado"));
             }
         }
+
     }
 }

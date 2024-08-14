@@ -49,11 +49,11 @@ namespace PruebaNewTechApi.Controllers
             }
 
             var usuario = await _context.Usuario!.FirstOrDefaultAsync(
-                    Login => Login.NombreUsuario == loginIn.nombreUsuario
+                    Login => Login.NombreUsuario == loginIn.NombreUsuario
                 );
 
             if (usuario != null)
-                if (usuario.Password == loginIn.password)
+                if (usuario.Password == loginIn.Password)
                     return Ok(usuario);
 
             return Ok(new Usuario());
@@ -62,7 +62,7 @@ namespace PruebaNewTechApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
-            Result resultMensseger = new Result("");
+            Result resultMensseger = new ();
 
             if (_context.Usuario == null)
             {
@@ -73,7 +73,7 @@ namespace PruebaNewTechApi.Controllers
             {
                 _context.Entry(usuario).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
-                resultMensseger.dataResult = "actulizado";
+                resultMensseger.DataResult = "Actualizado";
                 return Ok(resultMensseger);
             }
             else
@@ -85,15 +85,14 @@ namespace PruebaNewTechApi.Controllers
                 {
                     _context.Usuario.Add(usuario);
                     await _context.SaveChangesAsync();
-                    resultMensseger.dataResult = "agregar";
+                    resultMensseger.DataResult = "Se agregó el usuario";
                     return Ok(resultMensseger);
                 }
                 else
                 {
-                    resultMensseger.dataResult = result;
+                    resultMensseger.DataResult = result;
                     return BadRequest(resultMensseger);
                 }
-
             }
         }
 
@@ -109,6 +108,9 @@ namespace PruebaNewTechApi.Controllers
 
             else if (_context.Usuario!.Any(e => e.NombreUsuario == usuario.NombreUsuario))
                 result = "El nombre usuario ya existe";
+
+            else if (!_context.Licencias!.Any(e => e.NumeroLicencia == usuario.NumeroLicencia))
+                result = "La licencia no existe";
 
             return result;
         }
