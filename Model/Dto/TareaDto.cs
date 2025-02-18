@@ -12,9 +12,11 @@
             this.UsuarioId = tarea.UsuarioId;
             this.TareaId = tarea.TareaId;   
             this.Descripcion = tarea.Descripcion;
+            this.FechaEmpezada = tarea.FechaEmpezada;
             this.FechaCreada = tarea.FechaCreada;
             this.FechaTerminada = tarea.FechaTerminada;
             this.FechaVecimineto = tarea.FechaVecimineto;
+            this.Direccion = tarea.Direccion;
             this.Estado = tarea.Estado;
         }
     }

@@ -22,7 +22,7 @@ namespace PruebaNewTechApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TareaDto>>> GetListBook()
+        public async Task<ActionResult<IEnumerable<TareaDto>>> GetListTarea()
         {
 
             var TareasDtos = new List<TareaDto>();
@@ -36,7 +36,7 @@ namespace PruebaNewTechApi.Controllers
         }
 
         [HttpGet("{usuarioId}")]
-        public async Task<ActionResult<IEnumerable<Tarea>>> GetListBookForUsuarioId(int usuarioId)
+        public async Task<ActionResult<IEnumerable<Tarea>>> GetListTareaForUsuarioId(int usuarioId)
         {
             var usuarioExiste = _context.Usuario!.Any(e => e.UsuarioId == usuarioId);
 
@@ -45,7 +45,14 @@ namespace PruebaNewTechApi.Controllers
                 return NotFound(new Result("No existe el usuario"));
             }
 
-            return await _context.Tareas!.Where(t => t.UsuarioId == usuarioId).ToListAsync();
+            var TareasDtos = new List<TareaDto>();
+            var lista = await _context.Tareas!.Where(t => t.UsuarioId == usuarioId).ToListAsync();
+
+            lista.ForEach(tarea =>
+              TareasDtos.Add(new TareaDto(_context.Usuario!.Find(tarea.UsuarioId)!, tarea))
+            );
+
+            return TareasDtos;
         }
 
         [HttpPost]
