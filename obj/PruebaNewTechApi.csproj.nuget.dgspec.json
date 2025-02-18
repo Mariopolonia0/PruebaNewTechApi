@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mario\\source\\repos\\PruebaNewTech\\PruebaNewTechApi\\PruebaNewTechApi.csproj": {}
+    "C:\\Users\\mario\\Source\\Repos\\Mariopolonia0\\PruebaNewTechApi\\PruebaNewTechApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mario\\source\\repos\\PruebaNewTech\\PruebaNewTechApi\\PruebaNewTechApi.csproj": {
+    "C:\\Users\\mario\\Source\\Repos\\Mariopolonia0\\PruebaNewTechApi\\PruebaNewTechApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mario\\source\\repos\\PruebaNewTech\\PruebaNewTechApi\\PruebaNewTechApi.csproj",
+        "projectUniqueName": "C:\\Users\\mario\\Source\\Repos\\Mariopolonia0\\PruebaNewTechApi\\PruebaNewTechApi.csproj",
         "projectName": "PruebaNewTechApi",
-        "projectPath": "C:\\Users\\Mario\\source\\repos\\PruebaNewTech\\PruebaNewTechApi\\PruebaNewTechApi.csproj",
-        "packagesPath": "C:\\Users\\Mario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mario\\source\\repos\\PruebaNewTech\\PruebaNewTechApi\\obj\\",
+        "projectPath": "C:\\Users\\mario\\Source\\Repos\\Mariopolonia0\\PruebaNewTechApi\\PruebaNewTechApi.csproj",
+        "packagesPath": "C:\\Users\\mario\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mario\\source\\repos\\Mariopolonia0\\PruebaNewTechApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mario\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -61,7 +66,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -73,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.303\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.205\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using PruebaNewTechApi.DAL;
 using PruebaNewTechApi.Model;
 using PruebaNewTechApi.Model.Dto;
-using System.Threading;
 
 namespace PruebaNewTechApi.Controllers
 {
@@ -30,13 +29,13 @@ namespace PruebaNewTechApi.Controllers
             var lista = await _context.Tareas!.ToListAsync();
 
             lista.ForEach(tarea =>
-                TareasDtos.Add(new TareaDto(_context.Usuario!.Find(tarea.UsuarioId)!, tarea))
+              TareasDtos.Add(new TareaDto(_context.Usuario!.Find(tarea.UsuarioId)!, tarea))
             );
 
             return TareasDtos;
         }
 
-        [HttpGet("{usuarioId}")]//("{usuarioId}")
+        [HttpGet("{usuarioId}")]
         public async Task<ActionResult<IEnumerable<Tarea>>> GetListBookForUsuarioId(int usuarioId)
         {
             var usuarioExiste = _context.Usuario!.Any(e => e.UsuarioId == usuarioId);
@@ -78,6 +77,5 @@ namespace PruebaNewTechApi.Controllers
                 return Ok(new Result("agregado"));
             }
         }
-
     }
 }

@@ -12,7 +12,7 @@ namespace PruebaNewTechApi.Model
         public string Apellido { get; set; } = string.Empty;
         public string NombreUsuario { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string NumeroLicencia { get; set; } = string.Empty;
+        public string CodigoEmpresa { get; set; } = string.Empty;
         public Usuario() { }    
 
         public Usuario(int usuarioId, string nombre)
@@ -22,7 +22,7 @@ namespace PruebaNewTechApi.Model
             Apellido = "null";
             NombreUsuario = "null";
             Password = "null";
-            NumeroLicencia = "null";
+            CodigoEmpresa = "null";
         }
     }
 }

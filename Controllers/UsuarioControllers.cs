@@ -26,12 +26,25 @@ namespace PruebaNewTechApi.Controllers
             return await _context.Usuario!.ToListAsync();
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Usuario>> GetUsuario(int id)
+        {
+            var usuarios = await _context.Usuario!.FindAsync(id);
+
+            if (usuarios == null)
+            {
+                return NotFound();
+            }
+
+            return usuarios;
+        }
+
         [HttpGet("{Empresa}")]
-        public async Task<ActionResult<IEnumerable<UsuarioForTareas>>> GetUsuarioForTareas(String Empresa)
+        public async Task<ActionResult<IEnumerable<UsuarioForTareas>>> GetUsuarioInEmpresa(String Empresa)
         {
             var usuarios = new List<UsuarioForTareas>();
 
-            await _context.Usuario!.Where(u => u.NumeroLicencia == Empresa).
+            await _context.Usuario!.Where(u => u.CodigoEmpresa == Empresa).
                 ForEachAsync(usuario => usuarios.Add(
                     new UsuarioForTareas(usuario.UsuarioId, usuario.Nombre + " " + usuario.Apellido))
                 );
@@ -62,7 +75,7 @@ namespace PruebaNewTechApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Usuario>> PostUsuario(Usuario usuario)
         {
-            Result resultMensseger = new ();
+            Result resultMensseger = new();
 
             if (_context.Usuario == null)
             {
@@ -108,9 +121,6 @@ namespace PruebaNewTechApi.Controllers
 
             else if (_context.Usuario!.Any(e => e.NombreUsuario == usuario.NombreUsuario))
                 result = "El nombre usuario ya existe";
-
-            else if (!_context.Licencias!.Any(e => e.NumeroLicencia == usuario.NumeroLicencia))
-                result = "La licencia no existe";
 
             return result;
         }
