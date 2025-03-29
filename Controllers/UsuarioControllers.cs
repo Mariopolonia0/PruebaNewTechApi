@@ -21,6 +21,7 @@ namespace PruebaNewTechApi.Controllers
         }
 
         [HttpGet]
+        [Route("Todo")]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetListUsuario()
         {
             return await _context.Usuario!.ToListAsync();

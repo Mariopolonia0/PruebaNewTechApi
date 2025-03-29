@@ -8,7 +8,8 @@ namespace PruebaNewTechApi.DAL
         public DbSet<Book>? Book { set; get; }
         public DbSet<Usuario>? Usuario { set; get; }
         public DbSet<Tarea>? Tareas { set; get; }
-       
+        public DbSet<Clientes>? Clientes { set; get; }
+
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
 
@@ -33,6 +34,7 @@ namespace PruebaNewTechApi.DAL
                 NombreUsuario = "admin",
                 Password = "admin",
                 CodigoEmpresa = "SP"
-            });        }
+            });
+        }
     }
 }

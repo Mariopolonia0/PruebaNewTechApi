@@ -55,7 +55,7 @@ namespace PruebaNewTechApi.Controllers
             return TareasDtos;
         }
 
-        [HttpPost]
+        [HttpPost()]
         public async Task<ActionResult<Tarea>> PostTarea(Tarea tarea)
         {
             if (_context.Usuario == null)
@@ -82,6 +82,52 @@ namespace PruebaNewTechApi.Controllers
                 _context.Tareas!.Add(tarea);
                 await _context.SaveChangesAsync();
                 return Ok(new Result("agregado"));
+            }
+        }
+       
+        [HttpPost("ActualizarEmpezar")]
+        public async Task<ActionResult<Tarea>> ActualizarEmpezar(ActulizarFechaEmpezarTarea _tarea)
+        {
+            if (_context.Usuario == null)
+            {
+                return NotFound();
+            }
+            if (TareaExists(_tarea.id))
+            {
+                var tarea = await _context.Tareas!.FindAsync(_tarea.id);
+                tarea!.FechaEmpezada = _tarea.FechaEmpezar;
+                tarea!.Estado = _tarea.Estado;
+
+                _context.Tareas!.Update(tarea);
+                await _context.SaveChangesAsync();
+                return Ok(new Result("Actualidado la fecha empezar"));
+            }
+            else
+            {
+                return Ok(new Result("La tarea no existe"));
+            }
+        }
+        [HttpPost("ActualizarFinalizar")]
+        public async Task<ActionResult<Tarea>> ActualizarFinalizar(ActulizarNotaTarea _tarea)
+        {
+            if (_context.Usuario == null)
+            {
+                return NotFound();
+            }
+            if (TareaExists(_tarea.id))
+            {
+                var tarea = await _context.Tareas!.FindAsync(_tarea.id);
+                tarea!.NotaTerminada = _tarea.Nota;
+                tarea!.FechaTerminada = _tarea.FechaTerminada;
+                tarea!.Estado = _tarea.Estado;
+
+                _context.Tareas!.Update(tarea);
+                await _context.SaveChangesAsync();
+                return Ok(new Result("Actualidado la nota"));
+            }
+            else
+            {
+                return Ok(new Result("La tarea no existe"));
             }
         }
     }

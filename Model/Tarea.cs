@@ -10,6 +10,7 @@ namespace PruebaNewTechApi.Model
         public int TareaId { get; set; }
         public int UsuarioId { get; set; }
         public string Descripcion { get; set; } = string.Empty;
+        public string Cliente { get; set; } = string.Empty;
         public string NotaTerminada { get; set; } = string.Empty;
         public string FechaCreada { get; set; } = string.Empty;
         public string FechaEmpezada { get; set; } = string.Empty;
